@@ -1,5 +1,5 @@
 import * as valida from '../services/validate.js'
-import dao from "../DAO/clientesDAO.js";
+import dao from "../DAO/clientes-dao.js";
 
 const clientesM = {
 

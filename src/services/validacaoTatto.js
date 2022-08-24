@@ -1,15 +1,15 @@
-const validacao = {
-    valida: (categoria, link, id_tatuador) => {
-        if ((categoria.length == 0) || (link.length == 0) || (id_tatuador.length == 0)) {
-            throw {
-                mensagem: {
-                    mensagem: "Preencha todos os campos",
-                    error: true,
-                },
-                status: 400,
-            }
-        }
+import ErrorModel from "../model/erros-model.js";
 
-    },
-}
-export default validacao
+const validacao = {
+  valida: (preco, imagemUrl, nomeTatuador, disponivel) => {
+    if (
+      preco.length == 0 ||
+      imagemUrl.length == 0 ||
+      nomeTatuador.length == 0 ||
+      disponivel.length == 0
+    ) {
+      throw ErrorModel("Preencha todos os campos", true, 400);
+    }
+  },
+};
+export default validacao;

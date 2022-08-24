@@ -1,11 +1,7 @@
-import express from 'express';
 import cors from 'cors';
-import clientes from './clientesRoutes.js'
-import agendamentos from './agendamentosRoutes.js'
-import fornecedores from './fornecedores-routes.js'
-import tatuagens from './tatuagensRoutes.js'
-import produtos from './produtosRoutes.js'
-import tatuadores from './tatuadoresRoutes.js';
+import express from 'express';
+import clientes from './clientesRoutes.js';
+import tatuagens from './tatuagensRoutes.js';
 
 
 const routes = (app) => {
@@ -17,11 +13,7 @@ const routes = (app) => {
     express.json(),
     cors(),
     clientes,
-    agendamentos,
-    fornecedores,
-    tatuadores,
-    tatuagens,
-    produtos
+    tatuagens
   )
 }
 

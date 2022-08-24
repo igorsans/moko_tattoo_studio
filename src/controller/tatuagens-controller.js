@@ -1,32 +1,33 @@
-import tatuagensModel from "../model/tatuagens.js";
+import tatuagensModel from "../model/tatuagens-model.js";
+import tatuagensDAO from "../DAO/tatuagens-dao.js";
 
 const tatuagensController = {
   imagensTattoo: async (req, res) => {
     try {
-      const resposta = await tatuagensModel.pegaImagens();
+      const resposta = await tatuagensDAO.verTatuagens();
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
-      res.status(error.status).json(error.mensagem);
+      res.status(error.status).json(error.dados);
     }
   },
 
   imagemTattoo: async (req, res) => {
-    const id = req.params.id;
     try {
-      const resposta = await tatuagensModel.pegaImagem(id);
+      const resposta = await tatuagensDAO.verTatuagem(req.params.id)
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
-      res.status(error.status).json(error.mensagem);
+      res.status(error.status).json(error.dados);
     }
   },
 
   guardarImagens: async (req, res) => {
     const body = req.body;
     try {
-      const resposta = await tatuagensModel.insereImagem(body);
+      const dados = await tatuagensModel.modelar(body);
+      const resposta = await tatuagensDAO.criarTatuagem(dados)
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
-      res.status(error.status).json(error.mensagem);
+      res.status(error.status).json(error.dados);
     }
   },
 
@@ -34,20 +35,22 @@ const tatuagensController = {
     const body = req.body;
     const id = req.params.id;
     try {
-      const resposta = await tatuagensModel.atualizaImagem(id, body);
+      await tatuagensModel.atualizaImagem(id, body);
+      const resposta = await tatuagensDAO.ajustaTatuagem(id, body);
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
-      res.status(error.status).json(error.mensagem);
+      res.status(error.status).json(error.dados);
     }
   },
 
   deletarImagens: async (req, res) => {
     const id = req.params.id;
     try {
-      const resposta = await tatuagensModel.deletaImagem(id);
+      await tatuagensDAO.verTatuagem(id);
+      const resposta = await tatuagensDAO.deletarTatuagem(id);
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
-      res.status(error.status).json(error.mensagem);
+      res.status(error.status).json(error.dados);
     }
   },
 };
