@@ -12,7 +12,7 @@ const dao = {
                     );
                 } else if (!row) {
                     reject(
-                        ErrorModel('Usuario não encontrado', true, 404)
+                        ErrorModel('Usuario não encontrado!', true, 404)
                     );
                 } else {
                     resolve({
