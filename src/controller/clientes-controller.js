@@ -16,7 +16,6 @@ const clienteController = {
     const id = req.params.id
     try {
       const response = await dao.listarCliente(id)
-      console.log(response)
       res.status(response.status).json(response.dados);
     } catch (e) {
       res.status(e.status).json(e.dados)
@@ -27,7 +26,6 @@ const clienteController = {
     const body = req.body;
     try {
       const dados = await clienteM.modelar(body)
-      console.log("teste");
       const response = await dao.cadastrarCliente(dados)
       res.status(response.status).json(response.resposta)
     } catch (e) {

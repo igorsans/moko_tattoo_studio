@@ -104,7 +104,6 @@ const dao = {
         return new Promise((resolve, reject) => {
             db.run(ajustaTattoo, ...Object.values(body), id, (error) => {
                 if (error) {
-                    console.log(error)
                     reject(
                         ErrorModel('Server internal Error', true, 500)
                     );
@@ -126,7 +125,6 @@ const dao = {
         return new Promise((resolve, reject) => {
             db.run(ajustaTattoo, ...Object.values(body), id, (error) => {
                 if (error) {
-                    console.log(error)
                     reject(
                         ErrorModel('Server internal Error', true, 500)
                     );

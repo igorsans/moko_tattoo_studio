@@ -53,7 +53,7 @@ npm start
 
 ## :pencil: Rotas HTTP implementadas
 
-### 👨‍👩‍👧‍👦 Clientes
+## 👨‍👩‍👧‍👦 Clientes
 
 - **GET /clientes**
 
@@ -165,8 +165,7 @@ npm start
     "error": false
   }
   ```
-
-### 📸 Tatuagens
+## 📸 Tatuagens
 
 - **GET/tatuagens**
 
@@ -299,8 +298,164 @@ npm start
     "error": false
   }
   ```
+## :book: Agendamentos
 
-  ## Time de desenvolvimento original
+- **GET/agendamentos**
+
+  <p>Retorna todos os agendamentos do banco.<p>
+   Esquema da resposta:
+
+  ```json
+  {
+    "resultado": [
+        {
+            "id": 3,
+            "idCliente": 1,
+            "tattoId": 3,
+            "horario": 10
+        },
+        {
+            "id": 4,
+            "idCliente": 0,
+            "tattoId": 15,
+            "horario": 12
+        }...
+
+    ],
+    "error": false
+  }
+  ```
+
+- **GET /agendamentos/cliente/{id}**
+
+  <p> Retorna o agendamento correspondente ao id do cliente.<p> 
+  Esquema da resposta:
+
+  ```json
+  {
+    "resultado": [
+        {
+            "id": 3,
+            "idCliente": 0,
+            "tattoId": 3,
+            "horario": 10
+        },
+        {
+            "id": 4,
+            "idCliente": 0,
+            "tattoId": 15,
+            "horario": 12
+        }...
+
+    ],
+    "error": false
+  }
+  ```
+
+- **GET /agendamentos/tatto/{id}**
+
+  <p> Retorna o agendamento correspondente ao id da tatto.<p> 
+  Esquema da resposta:
+
+  ```json
+  {
+    "resultado": [
+        {
+            "id": 3,
+            "idCliente": 0,
+            "tattoId": 3,
+            "horario": 10
+        },
+        {
+            "id": 4,
+            "idCliente": 10,
+            "tattoId": 3,
+            "horario": 12
+        }...
+
+    ],
+    "error": false
+  }
+  ```
+
+- **GET /agendamentos/horario/{id}**
+
+  <p> Retorna o agendamento correspondente ao horario de agendamento da tatto.<p> 
+  Esquema da resposta:
+
+  ```json
+  {
+    "resultado": [
+      {
+        "id": 3,
+        "idCliente": 0,
+        "tattoId": 3,
+        "horario": 10
+      }
+    ],
+    "error": false
+  }
+  ```
+
+- **POST /agendamentos**
+
+  <p>Insere um agendamento no banco de dados.<p>
+
+  Esquema da requisição:
+
+  ```json
+  {
+    "idCliente": 0,
+    "tattoId": 1,
+    "horario": 17
+  }
+  ```
+
+  Esquema da resposta
+
+  ```json
+  {
+    "mensagem": "Agendamento inserido com sucesso!",
+    "error": false
+  }
+  ```
+
+- **PUT /agendamentos/{id}**
+
+  <p>Atualiza um agendamento de acordo com o id do agendamento.<p>
+  Esquema da requisição:
+
+  ```json
+  {
+    "idCliente": 0,
+    "tattoId": 1,
+    "horario": 22
+  }
+  ```
+
+  Esquema da resposta:
+
+  ```json
+  {
+    "mensagem": "Agendamento atualizado com sucesso!",
+    "error": false
+  }
+  ```
+
+
+- **DELETE /agendamentos/{id}**
+
+    <p>Deleta um agendamento de acordo com o id do agendamento.<p> 
+    Esquema da resposta:
+
+  ```json
+  {
+    "mensagem": "Agendamento deletado com sucesso!",
+    "error": false
+  }
+  ```
+
+## Time de desenvolvimento original
 
   - [Alonso Estevam](https://www.linkedin.com/in/alonso-estevam/)
   - [Beatriz Mioranza](https://www.linkedin.com/in/beatrizmioranza/)
