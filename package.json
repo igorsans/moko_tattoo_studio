@@ -4,7 +4,6 @@
   "description": "projeto final do modulo 4",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start": "node ./src/server.js",
     "database": "node ./src/database/create-and-populate.js",
     "delete-db": "rm ./src/database/database.db",
