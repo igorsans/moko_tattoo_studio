@@ -1,11 +1,12 @@
 import clienteM from "../model/clientes-model.js"
+import dao from "../DAO/clientes-dao.js";
 
 const clienteController = {
 
   listarClientes: async (req, res) => {
     try {
-      const Usuarios = await clienteM.getClientes();
-      res.status(200).json({Usuarios});
+      const dados = await dao.listarClientes()
+      res.status(dados.status).json(dados.resposta);
     } catch (e) {
       res.status(400).json({
         "msg" : e.message,
@@ -17,8 +18,8 @@ const clienteController = {
   listarCliente: async (req, res) => {
     const id = req.params.id
     try {
-      const resposta = await clienteM.getClienteById(id);
-      res.status(resposta.status).json(resposta.retorno);
+      const dados = await dao.listarCliente(id)
+      res.status(dados.status).json(dados.retorno);
     } catch (e) {
       res.status(404).json({
         "msg" : e.message,
@@ -30,8 +31,8 @@ const clienteController = {
   cadastrarCliente: async (req, res) => {
     const body = req.body;
     try {
-      const newUser = await clienteM.insereCliente(body)
-      res.status(201).json({newUser})
+      const response = await dao.cadastrarCliente(body)
+      res.status(201).json(response)
     } catch (e) {
       res.status(400).json({
         "msg" : e.message,

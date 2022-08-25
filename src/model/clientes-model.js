@@ -5,7 +5,7 @@ const clientesM = {
 
     getClientes: async () => {
         try {
-            const dados = await dao.listarClientes()
+            
             if (!dados) throw new Error("Não foi possível encontrar os dados")
             return dados
         } catch (error) {
@@ -16,7 +16,7 @@ const clientesM = {
     getClienteById: async (id) => {
         try {
             valida.validaId(id)
-            const dados = await dao.listarCliente(id)
+                        
             if (!dados) throw new Error("Não foi possível encontrar o Cliente")
             return dados
         } catch (error) {
@@ -27,7 +27,7 @@ const clientesM = {
     insereCliente: async (usuario) => {
         try {
             valida.validaUser(...Object.values(usuario))
-            const response = await dao.cadastrarCliente(usuario)
+            
             return response
         } catch (error) {
             throw error

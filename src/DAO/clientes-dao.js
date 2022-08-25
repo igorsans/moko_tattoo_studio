@@ -31,14 +31,20 @@ const dao = {
                 if(error)
                     reject(error)
                 else
-                    resolve(row)
+                    resolve({
+                        resposta: {
+                            resultado: row, 
+                            error: false
+                        },
+                        status: 200
+                    })
             })
         })
     },
 
     cadastrarCliente : (usuario) => {
-        const query = `INSERT INTO CLIENTES (NOME, TELEFONE)
-        VALUES (?, ?)`
+        const query = `INSERT INTO CLIENTES (NOME, TELEFONE, DATANASCIMENTO, EMAIL)
+        VALUES (?, ?, ?, ?)`
 
         return new Promise((resolve, reject) => {
             db.run(query, ...Object.values(usuario), (error,row) => {
@@ -55,7 +61,7 @@ const dao = {
     },
 
     atualizarCliente : (id, novo) => {
-        const query = `UPDATE CLIENTES SET nome = ?, telefone = ? WHERE id = ?`
+        const query = `UPDATE CLIENTES SET nome = ?, telefone = ?, dataNascimento = ?, email = ?, WHERE id = ?`
 
         return new Promise((resolve, reject)=>{
             db.run(query, ...Object.values(novo), id, (error) => {
