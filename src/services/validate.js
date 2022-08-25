@@ -1,11 +1,21 @@
+import ErrorModel from "../model/erros-model.js";
 
-    export const validaId = (id) => {if (isNaN(id)) throw new Error("id inválido")}    
+const validacao = {
+    validaUser : (nome, sobrenome, tel, dataNascimento, email) => {
+      if (
+        nome.length == 0 ||
+        sobrenome.length==0 ||
+        tel.length == 0 ||
+        dataNascimento.length == 0 ||
+        email.length == 0 
 
-    export const validaUser = (nome, tel, dataNascimento, email) => {
-        if(nome.length < 10) throw new Error("Seu nome deve ter ao menos 10 caracteres")
-        if(tel.length < 8) throw new Error("Telefone inválido")
-        if(dataNascimento.length === 10) throw new Error("Data de nascimento inválido")
-        if(email.length < 10 ) throw new Error("E-mail inválido")
-    }
+      ) {
+        throw ErrorModel("Preencha todos os campos", true, 400);
+      }
+    },
+    validaId : (id) => {if (isNaN(id)) ErrorModel("id não é um numero", true, 400) }
+  };
+  export default validacao;
+  
 
-
+    

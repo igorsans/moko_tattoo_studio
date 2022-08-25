@@ -1,21 +1,33 @@
-import * as valida from '../services/validate.js'
+import validacao from '../services/validate.js'
 import dao from "../DAO/clientes-dao.js";
 
 const clientesM = {
-
-    getClientes: async () => {
+    model: (obj)=>{
+        return {
+            nome: obj.nome,
+            sobrenome: obj.sobrenome,
+	        telefone: obj.telefone,
+	        dataNascimento: obj.dataNascimento,
+	        email: obj.email
+        }
+    },
+    modelar: async (obj)=>{
         try {
-            
-            if (!dados) throw new Error("Não foi possível encontrar os dados")
-            return dados
+            const criaCliente = clientesM.model(obj)
+            validacao.validaUser(...Object.values(criaCliente))
+
+            return criaCliente
         } catch (error) {
             throw error
         }
     },
 
+
+
+
     getClienteById: async (id) => {
         try {
-            valida.validaId(id)
+            validacao.validaId(id)
                         
             if (!dados) throw new Error("Não foi possível encontrar o Cliente")
             return dados
@@ -26,7 +38,7 @@ const clientesM = {
     
     insereCliente: async (usuario) => {
         try {
-            valida.validaUser(...Object.values(usuario))
+            validacao.validaUser(...Object.values(usuario))
             
             return response
         } catch (error) {
@@ -36,9 +48,8 @@ const clientesM = {
 
     updateCliente: async (id, usuario) => {
         try {
-            valida.validaId(id)            
-            dao.listarCliente(id)
-            valida.validaUser(...Object.values(usuario))
+
+            validacao.validaUser(...Object.values(usuario))
             const mensagem = await dao.atualizarCliente(id, usuario)
             return mensagem
         } catch (error) {
