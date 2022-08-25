@@ -61,23 +61,33 @@ npm start
 
   ```json
   {
-    "Usuarios": [
+    "resultado": [
       {
         "id": 1,
-        "nome": "Eugênio Oliveira",
-        "telefone": "21-994785122"
+        "nome": "Eugênio",
+        "sobrenome": "Silva",
+        "telefone": "21-994785122",
+        "dataNascimento": "25/02/1999",
+        "email": "Eugênio@gmail.com"
       },
       {
         "id": 2,
-        "nome": "Olívia Ribeiro",
-        "telefone": "21-988796335"
+        "nome": "Olívia",
+        "sobrenome": "pedro",
+        "telefone": "21-988796335",
+        "dataNascimento": "29/08/2000",
+        "email": "Olivia@gmail.com"
       },
       {
         "id": 3,
-        "nome": "Mirtes Faria Lima",
-        "telefone": "21-974659987"
+        "nome": "Mirtes",
+        "sobrenome": "silva",
+        "telefone": "21-974659987",
+        "dataNascimento": "05/12/2006",
+        "email": "Mirtes@gmail.com"
       }
-    ]
+    ],
+    "error": false
   }
   ```
 
@@ -87,13 +97,15 @@ npm start
 
   ```json
   {
-    {
-    "dados": {
-        "id": 1,
-        "nome": "Eugênio Oliveira",
-        "telefone": "21-994785122"
-    }
-    }
+    "resultado": {
+      "id": 1,
+      "nome": "Eugênio",
+      "sobrenome": "Silva",
+      "telefone": "21-994785122",
+      "dataNascimento": "25/02/1999",
+      "email": "Eugênio@gmail.com"
+    },
+    "error": false
   }
   ```
 
@@ -103,8 +115,11 @@ npm start
 
   ```json
   {
-    "nome": "Manuela Esteves",
-    "telefone": "21-992246521"
+    "nome": "Geovaldo",
+    "sobrenome": "Silva",
+    "telefone": "21-994785122",
+    "dataNascimento": "25/02/1999",
+    "email": "Eugênio@gmail.com"
   }
   ```
 
@@ -112,10 +127,8 @@ npm start
 
   ```json
   {
-    "newUser": {
-      "msg": "Usuário Manuela Esteves inserido com sucesso",
-      "erro": false
-    }
+    "resultado": "usuario cadastrado com sucesso",
+    "error": false
   }
   ```
 
@@ -125,8 +138,11 @@ npm start
 
   ```json
   {
-    "nome": "Maria Esteves",
-    "telefone": "21-992246521"
+    "nome": "Geovaldo",
+    "sobrenome": "Silva",
+    "telefone": "21-500000",
+    "dataNascimento": "25/02/1999",
+    "email": "Eugênio@gmail.com"
   }
   ```
 
@@ -134,8 +150,8 @@ npm start
 
   ```json
   {
-    "msg": "Usuário Maria Esteves, com id 1 atualizado com sucesso",
-    "erro": false
+    "resultado": "usuario atualizado com sucesso",
+    "error": false
   }
   ```
 
@@ -145,8 +161,8 @@ npm start
 
   ```json
   {
-    "msg": "Usuário 1 deletado com sucesso!",
-    "erro": "false"
+    "resultado": "usuario deletado com sucesso",
+    "error": false
   }
   ```
 
@@ -250,6 +266,7 @@ npm start
     "error": false
   }
   ```
+
 - **PUT /tatuagens/clientes/{id}**
 
   <p>Atualiza uma imagem de acordo com o id.<p>
@@ -270,7 +287,6 @@ npm start
     "error": false
   }
   ```
-
 
 - **DELETE /tatuagens/{id}**
 

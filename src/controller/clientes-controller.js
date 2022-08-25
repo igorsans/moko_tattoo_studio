@@ -5,26 +5,21 @@ const clienteController = {
 
   listarClientes: async (req, res) => {
     try {
-      const dados = await dao.listarClientes()
-      res.status(dados.status).json(dados.resposta);
+      const response = await dao.listarClientes()
+      res.status(response.status).json(response.resposta);
     } catch (e) {
-      res.status(400).json({
-        "msg" : e.message,
-        "erro" : "true"
-      });
+      res.status(e.status).json(e.dados)
     }
   },
 
   listarCliente: async (req, res) => {
     const id = req.params.id
     try {
-      const dados = await dao.listarCliente(id)
-      res.status(dados.status).json(dados.retorno);
+      const response = await dao.listarCliente(id)
+      console.log(response)
+      res.status(response.status).json(response.dados);
     } catch (e) {
-      res.status(404).json({
-        "msg" : e.message,
-        "erro" : "true"
-      });
+      res.status(e.status).json(e.dados)
     }
   },
 
