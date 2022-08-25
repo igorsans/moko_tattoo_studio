@@ -20,6 +20,16 @@ const tatuagensController = {
     }
   },
 
+  historicoCliente: async (req, res) => {
+    try {
+      const resposta = await tatuagensDAO.verHistoricoCliente(req.params.id)
+      res.status(resposta.status).json(resposta.dados)
+    } catch (error) {
+      res.status(error.status).json(error.dados)
+    }
+  },
+
+
   guardarImagens: async (req, res) => {
     const body = req.body;
     try {
@@ -35,8 +45,21 @@ const tatuagensController = {
     const body = req.body;
     const id = req.params.id;
     try {
-      await tatuagensModel.atualizaImagem(id, body);
-      const resposta = await tatuagensDAO.ajustaTatuagem(id, body);
+      await tatuagensDAO.verTatuagem(id);
+      const dados = await tatuagensModel.modelar(body);
+      const resposta = await tatuagensDAO.ajustaTatuagem(id, dados);
+      res.status(resposta.status).json(resposta.dados);
+    } catch (error) {
+      res.status(error.status).json(error.dados);
+    }
+  },
+
+  ajustarComprador: async (req,res) => {
+    const body = req.body;
+    const id = req.params.id
+    try {
+      await tatuagensDAO.verTatuagem(id);
+      const resposta = await tatuagensDAO.ajustaTatuagemDisponivel(id, body);
       res.status(resposta.status).json(resposta.dados);
     } catch (error) {
       res.status(error.status).json(error.dados);
