@@ -1,11 +1,12 @@
 import clienteM from "../model/clientes-model.js"
+import dao from "../DAO/clientes-dao.js";
 
 const clienteController = {
 
   listarClientes: async (req, res) => {
     try {
-      const Usuarios = await clienteM.getClientes();
-      res.status(200).json({Usuarios});
+      const dados = await dao.listarClientes()
+      res.status(dados.status).json(dados.resposta);
     } catch (e) {
       res.status(400).json({
         "msg" : e.message,
@@ -17,8 +18,8 @@ const clienteController = {
   listarCliente: async (req, res) => {
     const id = req.params.id
     try {
-      const resposta = await clienteM.getClienteById(id);
-      res.status(resposta.status).json(resposta.retorno);
+      const dados = await dao.listarCliente(id)
+      res.status(dados.status).json(dados.retorno);
     } catch (e) {
       res.status(404).json({
         "msg" : e.message,
@@ -30,40 +31,36 @@ const clienteController = {
   cadastrarCliente: async (req, res) => {
     const body = req.body;
     try {
-      const newUser = await clienteM.insereCliente(body)
-      res.status(201).json({newUser})
+      const dados = await clienteM.modelar(body)
+      console.log("teste");
+      const response = await dao.cadastrarCliente(dados)
+      res.status(response.status).json(response.resposta)
     } catch (e) {
-      res.status(400).json({
-        "msg" : e.message,
-        "erro" : "true"
-      })
+      res.status(e.status).json(e.dados)
     }
   },
 
   atualizarCliente: async (req, res) => {
     const body = req.body
     const id = req.params.id
-    try {
-      const newUser = await clienteM.updateCliente(id, body)
-      res.status(200).json(newUser)
+    try {          
+      await dao.listarCliente(id)
+      const dados = await clienteM.modelar(body)
+      const response = await  dao.atualizarCliente(id, dados)
+      res.status(response.status).json(response.resposta)
     } catch (e) {
-      res.status(500).json({
-       "msg" : e.message,
-       "erro" : "true"
-      })
+      res.status(e.status).json(e.dados)
     }
   },
 
   deletarCliente : async (req, res) => {
     const id = req.params.id
     try {
-      const result = await clienteM.deleteCliente(id)
-      res.status(200).json(result)
+      await dao.listarCliente(id)
+      const response = await dao.deletarCliente(id)
+      res.status(response.status).json(response.resposta)
     } catch (e) {
-      res.status(e.status).json({
-        "msg": e.message,
-        "erro": true
-      })
+      res.status(e.status).json(e.dados)
     }
   }
   
