@@ -11,7 +11,9 @@ const DATABASE_SCHEMA = [
     query: `CREATE TABLE IF NOT EXISTS "CLIENTES" (
             "id" INTEGER PRIMARY KEY AUTOINCREMENT,
             "nome" varchar(64),
-            "telefone" varchar(12)
+            "telefone" varchar(12),
+            "dataNascimento" varchar(15),
+            "email" varchar(50),
             )`,
   },
   {
@@ -31,9 +33,9 @@ const Population = [
     entidade: "Tabela Clientes Populada",
     query: `INSERT INTO CLIENTES (NOME, TELEFONE)
     VALUES 
-        ('Eugênio Oliveira', '21-994785122'),
-        ('Olívia Ribeiro', '21-988796335'),
-        ('Mirtes Faria Lima', '21-974659987');`,
+        ('Eugênio Oliveira', '21-994785122', '25/02/1999', 'Eugênio@gmail.com'),
+        ('Olívia Ribeiro', '21-988796335', '29/08/2000', 'Olivia@gmail.com'),
+        ('Mirtes Faria Lima', '21-974659987', '05/12/2006', 'Mirtes@gmail.com');`,
   },
   {
     entidade: "Tabela Tatuagens Populada",
