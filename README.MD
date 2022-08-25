@@ -467,6 +467,6 @@ npm start
   ## Time de desenvolvimento atual
 
   - [Edson Vieira](https://github.com/Edson-7728)
-  - [Igor Santos](https://github.com/igorsans)
   - [Guilherme Cordeiro](https://github.com/Dev-DaMata)
+  - [Igor Santos](https://github.com/igorsans)
   - [Pedro Garrido](https://www.linkedin.com/in/pedro-garrido-1a8482205/)
