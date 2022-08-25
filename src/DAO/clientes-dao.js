@@ -1,25 +1,28 @@
 import db from "../database/database.js"
-
+import ErrorModel from "../model/erros-model.js";
 const dao = {
 
     listarCliente : (id) => {
         const query = "SELECT * FROM CLIENTES WHERE id = ?"
         return new Promise((resolve, reject) => {
-            db.get(query, id, (error,row) => {
-                if(error) {
-                    reject(error)
-                } else if ((!row) || row.length <= 0) {
-                    reject({
-                        "message": 'Usuário não encontrado',
-                        "status": 404,
-                        "erro": true
-                    })
-                } else {resolve({
-                    "status": 200,
-                    "retorno" : {
-                    "dados" : row
-                    }
-                })}
+            db.get(query, id, (error,row) =>  {
+                if (error) {
+                    reject( 
+                        ErrorModel('Server internal Error', true, 500)
+                    );
+                } else if (!row) {
+                    reject(
+                        ErrorModel('Usuario não encontrado', true, 404)
+                    );
+                } else {
+                    resolve({
+                        dados: {
+                            resultado: row,
+                            error: false
+                        },
+                        status: 200
+                    });
+                }
             })
         })
     },
@@ -29,43 +32,55 @@ const dao = {
         return new Promise((resolve, reject) => {
             db.all(query, (error,row) => {
                 if(error)
-                    reject(error)
+                reject (ErrorModel(error, true, 500))
+                    else if(!row) ErrorModel("Banco de dados vazio", true, 404)
                 else
-                    resolve(row)
+                    resolve({
+                        resposta: {
+                            resultado: row, 
+                            error: false
+                        },
+                        status: 200
+                    })
             })
         })
     },
 
     cadastrarCliente : (usuario) => {
-        const query = `INSERT INTO CLIENTES (NOME, TELEFONE)
-        VALUES (?, ?)`
+        const query = `INSERT INTO CLIENTES (NOME, SOBRENOME, TELEFONE, DATANASCIMENTO, EMAIL)
+        VALUES (?, ?, ?, ?, ?)`
 
         return new Promise((resolve, reject) => {
-            db.run(query, ...Object.values(usuario), (error,row) => {
+            db.run(query, ...Object.values(usuario), (error) => {
                 if(error)
-                    reject(error)
+                    reject (ErrorModel(error, true, 500))
                 else
                     resolve({
-                        "msg": `Usuário ${usuario.nome} inserido com sucesso`,
-                        "user": row,
-                        "erro": false
-                      })
+                        resposta: {
+                            resultado: "usuario cadastrado com sucesso", 
+                            error: false
+                        },
+                        status: 200
+                    })
             })
         })
     },
 
     atualizarCliente : (id, novo) => {
-        const query = `UPDATE CLIENTES SET nome = ?, telefone = ? WHERE id = ?`
+        const query = `UPDATE CLIENTES SET nome = ?, sobrenome = ?, telefone = ?, dataNascimento = ?, email = ? WHERE id = ?`
 
         return new Promise((resolve, reject)=>{
             db.run(query, ...Object.values(novo), id, (error) => {
                     if(error)
-                        reject(error)
+                    reject (ErrorModel(error, true, 500))
                     else
                         resolve({
-                            "msg": `Usuário ${novo.nome}, com id ${id} atualizado com sucesso`,
-                            "erro": false
-                          })
+                            resposta: {
+                                resultado: "usuario atualizado com sucesso", 
+                                error: false
+                            },
+                            status: 200
+                        })
                 }
             )
         })  
@@ -77,12 +92,15 @@ const dao = {
         return new Promise((resolve, reject) => {
             db.run(query, id, (error, row) => {
                 if(error)
-                        reject(error)
+                reject (ErrorModel(error, true, 500))
                     else
                         resolve({
-                            "msg": `Usuário ${id} deletado com sucesso!`,
-                            "erro": "false"
-                          })
+                            resposta: {
+                                resultado: "usuario deletado com sucesso", 
+                                error: false
+                            },
+                            status: 200
+                        })
                 })
         })
     }
