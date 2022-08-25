@@ -50,9 +50,34 @@ const dao = {
             });
         });
     },
+    
+    verHistoricoCliente: (id) => {
+        const pegaTattoo = `SELECT * FROM TATUAGENS WHERE idComprador = ?`;
+        return new Promise((resolve, reject) => {
+            db.all(pegaTattoo, id, (error, row) => {
+                if (error) {
+                    reject(
+                        ErrorModel('Server internal Error', true, 500)
+                        );
+                } else if (!row) {
+                    reject(
+                        ErrorModel('Tattuagem não encontrada', true, 404)
+                    );
+                } else {
+                    resolve({
+                        dados: {
+                            resultado: row,
+                            error: false
+                        },
+                        status: 200
+                    });
+                }
+            });
+        });
+    },
 
     criarTatuagem: (obj) => {
-        const criaTattoo = `INSERT INTO TATUAGENS (preco, imagemUrl, nomeTatuador, disponivel) VALUES (?, ?, ?,? )`;
+        const criaTattoo = `INSERT INTO TATUAGENS (preco, imagemUrl, nomeTatuador, disponivel, idComprador) VALUES (?, ?, ?, ?, ?)`;
 
         return new Promise((resolve, reject) => {
             db.run(criaTattoo, ...Object.values(obj), (error) => {
@@ -75,7 +100,7 @@ const dao = {
 
 
     ajustaTatuagem: (id, body) => {
-        const ajustaTattoo = `UPDATE TATUAGENS SET preco = ?, imagemUrl = ?, nomeTatuador = ?, disponivel  = ? WHERE id= ?`;
+        const ajustaTattoo = `UPDATE TATUAGENS SET preco = ?, imagemUrl = ?, nomeTatuador = ?, disponivel  = ?, idComprador= ? WHERE id= ?`;
         return new Promise((resolve, reject) => {
             db.run(ajustaTattoo, ...Object.values(body), id, (error) => {
                 if (error) {
@@ -97,7 +122,7 @@ const dao = {
     },
 
     ajustaTatuagemDisponivel: (id, body) => {
-        const ajustaTattoo = `UPDATE TATUAGENS SET disponivel  = ? WHERE id= ?`;
+        const ajustaTattoo = `UPDATE TATUAGENS SET disponivel  = ?, idComprador = ? WHERE id= ?`;
         return new Promise((resolve, reject) => {
             db.run(ajustaTattoo, ...Object.values(body), id, (error) => {
                 if (error) {
