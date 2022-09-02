@@ -14,7 +14,8 @@ const DATABASE_SCHEMA = [
             "sobrenome" varchar(64),
             "telefone" varchar(12),
             "dataNascimento" varchar(15),
-            "email" varchar(50)
+            "email" varchar(50),
+            "senha" varchar(50)
             )`,
   },
   {
@@ -36,17 +37,26 @@ const DATABASE_SCHEMA = [
             "tattoId" int,
             "horario" int
             )`,
+  },
+  {
+    entidade: "Tabela Noticias Criada",
+    query: `CREATE TABLE IF NOT EXISTS "NOTICIAS" (
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "urlImagem" varchar(255),
+      "descricao" varchar(50),
+      "titulo" varchar(60)
+    )`
   }
 ];
 
 const Population = [
   {
     entidade: "Tabela Clientes Populada",
-    query: `INSERT INTO CLIENTES (nome, sobrenome, telefone, dataNascimento, email)
+    query: `INSERT INTO CLIENTES (nome, sobrenome, telefone, dataNascimento, email, senha)
     VALUES 
-        ("Eugênio","Silva", "21-994785122", "25/02/1999", "Eugênio@gmail.com"),
-        ("Olívia","pedro", "21-988796335", "29/08/2000", "Olivia@gmail.com"),
-        ("Mirtes","silva", "21-974659987", "05/12/2006", "Mirtes@gmail.com");`,
+        ("Eugênio","Silva", "21-994785122", "25/02/1999", "Eugênio@gmail.com", "senhaTeste1"),
+        ("Olívia","pedro", "21-988796335", "29/08/2000", "Olivia@gmail.com", "senhaTeste2"),
+        ("Mirtes","silva", "21-974659987", "05/12/2006", "Mirtes@gmail.com", "senhaTeste3");`,
   },
   {
     entidade: "Tabela Tatuagens Populada",
@@ -80,6 +90,14 @@ const Population = [
         (0,1,12),
         (0,2,15),
         (0,3,10);`,
+  },
+  {
+    entidade: "Tabela Noticias Populada",
+    query: `INSERT INTO NOTICIAS (urlImagem, descricao, titulo)
+    VALUES
+    ('https://www.portaldosjornalistas.com.br/wp-content/uploads/2020/01/Premiados.jpg', "Eleito o estudio mais famoso do bairro de são paulo, Moko Tatto tem feito bastante pessoas entrarem na cultura", "Saímos no G1"),
+    ('https://pbs.twimg.com/media/Bv6aCtHIIAA2PsS.jpg', "Eleito o estudio mais famoso do bairro de são paulo, Moko Tatto tem feito bastante pessoas entrarem na cultura", "Indique um amigo"),
+    ('https://i.pinimg.com/originals/06/b4/91/06b491c36ab7485f40eed939d6729f70.jpg', "Conheça mais sobre o mundo da tattuagem", "Por dentro dos traços");`,
   }
   
 ];

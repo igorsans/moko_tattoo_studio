@@ -7,7 +7,8 @@ const clientesM = {
             sobrenome: obj.sobrenome,
 	        telefone: obj.telefone,
 	        dataNascimento: obj.dataNascimento,
-	        email: obj.email
+	        email: obj.email,
+            senha: obj.senha
         }
     },
     modelar: async (obj)=>{
