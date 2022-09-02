@@ -2,7 +2,8 @@ import cors from 'cors';
 import express from 'express';
 import clientes from './clientesRoutes.js';
 import tatuagens from './tatuagensRoutes.js';
-import agendamento from './agendamentosRouters.js'
+import agendamento from './agendamentosRouters.js';
+import noticias from "./noticiasRoutes.js"
 
 
 const routes = (app) => {
@@ -15,7 +16,8 @@ const routes = (app) => {
     cors(),
     clientes,
     tatuagens,
-    agendamento
+    agendamento,
+    noticias
   )
 }
 

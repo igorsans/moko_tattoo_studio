@@ -1,14 +1,14 @@
 import ErrorModel from "../model/erros-model.js";
 
 const validacao = {
-    validaUser : (nome, sobrenome, tel, dataNascimento, email) => {
+    validaUser : (nome, sobrenome, tel, dataNascimento, email, senha) => {
       if (
         nome.length == 0 ||
         sobrenome.length==0 ||
         tel.length == 0 ||
         dataNascimento.length == 0 ||
-        email.length == 0 
-
+        email.length == 0 ||
+        senha.length == 0
       ) {
         throw ErrorModel("Preencha todos os campos", true, 400);
       }
