@@ -14,7 +14,7 @@ const clientesM = {
     modelar: async (obj)=>{
         try {
             const criaCliente = clientesM.model(obj)
-            validacao.validaUser(...Object.values(criaCliente))
+            
 
             return criaCliente
         } catch (error) {

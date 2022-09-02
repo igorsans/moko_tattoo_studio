@@ -28,7 +28,7 @@ const dao = {
     },
 
     listarNoticias: () =>{
-        const query = `SELECT * FROM NOTICIAS`
+        const query = `SELECT * FROM NOTICIAS ORDER BY id DESC`
         return new Promise((resolve, reject) => {
             db.all(query, (error, row) => {
                 if(error)
